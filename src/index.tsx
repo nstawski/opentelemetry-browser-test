@@ -3,9 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import * as opentracing from "opentracing";
-
-const tracer = new opentracing.Tracer();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
