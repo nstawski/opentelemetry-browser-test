@@ -41,7 +41,7 @@ export const useTelemetry = () => {
     // To create a span in a trace, we used the global singleton tracer to start a new span.
     let span: Span;
     if (parent) {
-      span = tracer.startSpan("bar", { parent: parent.context() });
+      span = tracer.startSpan("bar", { parent });
     } else {
       span = tracer.startSpan("foo");
     }
@@ -66,8 +66,6 @@ export const useTelemetry = () => {
     console.log("span", span);
     span && span.end();
     span.attributes.parent && endSpan(span.attributes.parent);
-
-    tracer.getCurrentSpan();
   };
 
   return {

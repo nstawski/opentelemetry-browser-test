@@ -21,7 +21,7 @@ const App: React.FC = () => {
     if (currentParent) {
       spanAttriutes["parent"] = currentParent;
     }
-    currentParent = startSpan(spanAttriutes);
+    currentParent = startSpan(spanAttriutes, currentParent);
   };
 
   const endAllSpans = () => {
