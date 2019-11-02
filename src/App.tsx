@@ -28,7 +28,7 @@ const App: React.FC = () => {
     endSpan(currentParent);
   };
 
-  const buttons = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const buttons = Array.from({length: 8}, (v, k) => k+1);;
 
   return (
     <div className="App">
