@@ -36,7 +36,7 @@ const App: React.FC = () => {
         {buttons.map(button => (
           <button
             key={`button-${button}`}
-            onClick={() => startButtonSpan(button)}
+            onClick={() => startButtonSpan(button.toString())}
           >
             Click me {button}
           </button>
