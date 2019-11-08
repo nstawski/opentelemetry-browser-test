@@ -56,16 +56,12 @@ export const useTelemetry = () => {
     if (eventName) {
       span.addEvent(eventName);
     }
-    // span.attributes.parent && span.end();
+    parent && span.end();
     return span;
   };
 
   const endSpan = (span: any) => {
-    const traceParams = tracer.getActiveTraceParams();
-    console.log("traceParams", traceParams);
-    console.log("span", span);
-    span && span.end();
-    span.attributes.parent && endSpan(span.attributes.parent);
+    span.parent && endSpan(span.attributes.parent);
   };
 
   return {
