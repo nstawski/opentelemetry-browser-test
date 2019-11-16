@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import { useTelemetry } from "./useTelemetry";
@@ -28,7 +27,7 @@ const App: React.FC = () => {
     endSpan(currentParent);
   };
 
-  const buttons = Array.from({length: 8}, (v, k) => k+1);;
+  const buttons = Array.from({ length: 8 }, (v, k) => k + 1);
 
   return (
     <div className="App">

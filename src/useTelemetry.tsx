@@ -9,10 +9,6 @@ type SpanAttributes = {
   [key: string]: any;
 };
 
-type Traces = {
-  [key: string]: Span;
-};
-
 export const useTelemetry = () => {
   // Create a Tracer. The default traces does not record any tracing information
   const tracer = new BasicTracer();
@@ -29,9 +25,6 @@ export const useTelemetry = () => {
 
   // Initialize the OpenTelemetry APIs to use the BasicTracer bindings
   opentelemetry.initGlobalTracer(tracer);
-
-  // // We must end the spans so they becomes available for exporting.
-  // span.end();
 
   const startSpan = (
     attributes: SpanAttributes,
