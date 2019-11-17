@@ -41,7 +41,7 @@ const App: React.FC = () => {
             Click me {button}
           </button>
         ))}
-        <button key="end" onClick={endAllSpans}>
+        <button key="end" onClick={endAllSpans} className="end">
           End parent span
         </button>
       </header>

@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import * as opentelemetry from "@opentelemetry/core";
 import { BasicTracer, SimpleSpanProcessor } from "@opentelemetry/tracing";
 import { ZipkinExporter } from "@opentelemetry/exporter-zipkin";
