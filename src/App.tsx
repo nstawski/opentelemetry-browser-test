@@ -42,7 +42,7 @@ const App: React.FC = () => {
           </button>
         ))}
         <button key="end" onClick={endAllSpans}>
-          End span
+          End parent span
         </button>
       </header>
     </div>
