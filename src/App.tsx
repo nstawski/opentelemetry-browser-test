@@ -13,18 +13,19 @@ type SpanAttributes = {
 const App: React.FC = () => {
   const { startSpan, endSpan } = useTelemetry();
 
-  let currentParent: Span;
+  let currentParent: Span | undefined;
 
   const startButtonSpan = (id: string) => {
     const spanAttriutes: SpanAttributes = { buttonID: id, event: "click" };
-    if (currentParent) {
-      spanAttriutes["parent"] = currentParent;
+    const span = startSpan(spanAttriutes, currentParent);
+    if (!currentParent) {
+      currentParent = span;
     }
-    currentParent = startSpan(spanAttriutes, currentParent);
   };
 
   const endAllSpans = () => {
     endSpan(currentParent);
+    currentParent = undefined;
   };
 
   const buttons = Array.from({ length: 8 }, (v, k) => k + 1);

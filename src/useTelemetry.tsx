@@ -54,7 +54,7 @@ export const useTelemetry = () => {
   };
 
   const endSpan = (span: any) => {
-    span.parent && endSpan(span.attributes.parent);
+    span.end();
   };
 
   return {
