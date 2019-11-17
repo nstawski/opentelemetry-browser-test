@@ -1,52 +1,52 @@
-import React from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import { Span } from '@opentelemetry/types';
 
-import { useTelemetry } from "./useTelemetry";
-import { Span } from "@opentelemetry/types";
-
-type SpanAttributes = {
-  buttonID: string;
-  event: string;
-  parent?: Span;
-};
+import './App.css';
+import { useTelemetry, SpanAttributes } from './useTelemetry'
 
 const App: React.FC = () => {
   const { startSpan, endSpan } = useTelemetry();
+  const [currentParent, setCurrentParent ] = useState<Span>();
 
-  let currentParent: Span | undefined;
+  const startButtonSpan = (button: string) => {
+    const spanAttributes: SpanAttributes = {
+      buttonID: button,
+      event: 'click'
+    }
 
-  const startButtonSpan = (id: string) => {
-    const spanAttriutes: SpanAttributes = { buttonID: id, event: "click" };
-    const span = startSpan(spanAttriutes, currentParent);
+    const span = startSpan(spanAttributes, currentParent);
+
     if (!currentParent) {
-      currentParent = span;
+      setCurrentParent(span);
     }
   };
 
-  const endAllSpans = () => {
-    endSpan(currentParent);
-    currentParent = undefined;
+  const endParentSpan = () => {
+    // currentParent && endSpan(currentParent);
+    setCurrentParent(undefined);
   };
 
-  const buttons = Array.from({ length: 8 }, (v, k) => k + 1);
+  const buttons = Array.from({ length: 8 }, (v, k) => (k+1).toString());
 
   return (
     <div className="App">
       <header className="App-header">
-        {buttons.map(button => (
-          <button
-            key={`button-${button}`}
-            onClick={() => startButtonSpan(button.toString())}
-          >
-            Click me {button}
-          </button>
-        ))}
-        <button key="end" onClick={endAllSpans} className="end">
-          End parent span
+      {buttons.map(button => (
+        <button
+        key={`button-${button}`}
+        onClick={() => startButtonSpan(button)}
+        >
+          Button #{button}
         </button>
+      ))}
+      <button
+      key="endParentSpan"
+      onClick={() => endParentSpan()}
+      className="end"
+      >End parent span</button>
       </header>
     </div>
   );
-};
+}
 
 export default App;

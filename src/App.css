@@ -26,8 +26,14 @@ button {
   width: 180px;
   height: 40px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
-button.end {
+button:active {
+  background-color: navy;
+  color: white;
+}
+
+.end {
   background-color: lightblue;
 }
