@@ -14,7 +14,11 @@ const App: React.FC = () => {
       event: "click"
     };
 
-    const span = startSpan(spanAttributes, currentParent);
+    const span: Span = startSpan(
+      `button-${button}`,
+      spanAttributes,
+      currentParent
+    );
 
     if (!currentParent) {
       setCurrentParent(span);
