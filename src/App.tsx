@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Span } from '@opentelemetry/types';
+import React, { useState } from "react";
+import { Span } from "@opentelemetry/types";
 
-import './App.css';
-import { useTelemetry, SpanAttributes } from './useTelemetry'
+import "./App.css";
+import { useTelemetry, SpanAttributes } from "./useTelemetry";
 
 const App: React.FC = () => {
-  const { startSpan, endSpan } = useTelemetry();
-  const [currentParent, setCurrentParent ] = useState<Span>();
+  const { startSpan } = useTelemetry();
+  const [currentParent, setCurrentParent] = useState<Span>();
 
   const startButtonSpan = (button: string) => {
     const spanAttributes: SpanAttributes = {
       buttonID: button,
-      event: 'click'
-    }
+      event: "click"
+    };
 
     const span = startSpan(spanAttributes, currentParent);
 
@@ -22,31 +22,32 @@ const App: React.FC = () => {
   };
 
   const endParentSpan = () => {
-    // currentParent && endSpan(currentParent);
     setCurrentParent(undefined);
   };
 
-  const buttons = Array.from({ length: 8 }, (v, k) => (k+1).toString());
+  const buttons = Array.from({ length: 8 }, (v, k) => (k + 1).toString());
 
   return (
     <div className="App">
       <header className="App-header">
-      {buttons.map(button => (
+        {buttons.map(button => (
+          <button
+            key={`button-${button}`}
+            onClick={() => startButtonSpan(button)}
+          >
+            Button #{button}
+          </button>
+        ))}
         <button
-        key={`button-${button}`}
-        onClick={() => startButtonSpan(button)}
+          key="endParentSpan"
+          onClick={() => endParentSpan()}
+          className="end"
         >
-          Button #{button}
+          End parent span
         </button>
-      ))}
-      <button
-      key="endParentSpan"
-      onClick={() => endParentSpan()}
-      className="end"
-      >End parent span</button>
       </header>
     </div>
   );
-}
+};
 
 export default App;
