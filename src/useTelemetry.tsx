@@ -1,7 +1,7 @@
 import * as opentelemetry from "@opentelemetry/core";
 import { BasicTracer, SimpleSpanProcessor } from "@opentelemetry/tracing";
-import { ZipkinExporter } from "@opentelemetry/exporter-zipkin";
 import { Span } from "@opentelemetry/types";
+import { ZipkinExporter } from "@opentelemetry/exporter-zipkin";
 
 export type SpanAttributes = {
   [key: string]: any;
